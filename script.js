@@ -24,7 +24,7 @@ function setBudget() {
         alert(`Pleade provide positive budget!`);
     }
 
-    //console.log(totalBudget);
+    console.log(totalBudget);
 
     // Reset budget input
     $('#budget-input').val('');
@@ -71,7 +71,7 @@ function render() {
 }
 
 function deleteEmployee() {
-    // console.log(this.id)
+    //console.log(this)
     let indexToRemove = this.id;
 
     employees.splice(indexToRemove, 1);
@@ -86,11 +86,12 @@ function submit() {
     let annualSalary = $('#annual-salary').val();
 
     //console.log(firstName, lastName, employeeID, employeeTitle, annualSalary)
-    if(totalBudget === 0) {
+    console.log(totalBudget);
+    if(totalBudget === undefined) {
         console.log(true);
         alert(`What's your budget?`)
     } 
-    else if(firstName && lastName && employeeID && employeeTitle && annualSalary){
+    else if(firstName && lastName && employeeID && employeeTitle && annualSalary && totalBudget){
         let employeeObject = {
             firstName: firstName,
             lastName: lastName,
