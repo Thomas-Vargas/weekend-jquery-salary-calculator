@@ -59,7 +59,7 @@ header {
 }
 
 .grid p {
-    background-color: white;
+
     font-size: 16px;
     margin: 0;
     padding: 10px;
@@ -71,7 +71,7 @@ header {
 }
 
 .delete-btn {
-    background-color: white;
+    background-color: lightgray;
     font-size: 16px;
 }
 
@@ -88,7 +88,7 @@ header {
     font-weight: bold;
 }
 
-#submit {
+#submit, #budget-submit {
     height: 23px;
     width: 100px;
     background-color: white;
@@ -116,4 +116,12 @@ header {
 
 .white-background {
     background-color: white;
+}
+
+#budget-input {
+    margin-left: 20px;
+}
+
+.light-gray {
+    background-color: lightgray;
 }

@@ -2,6 +2,7 @@ console.log('js loaded')
 
 let employees = [];
 let monthlyCost = 0;
+let totalBudget;
 
 $(document).ready(readyNow);
 
@@ -9,6 +10,24 @@ function readyNow() {
     $('#monthly-cost').addClass('white-background');
     $('#submit').on('click', submit);
     $('.grid').on('click', '.delete-btn', deleteEmployee);
+    $('#budget-submit').on('click', setBudget);
+}
+
+function setBudget() {
+    if (totalBudget = $('#budget-input').val() > 0) {
+        totalBudget = $('#budget-input').val();
+    } 
+
+    if (totalBudget) {
+        $('#user-budget').text(`Total Budget: ${totalBudget}`);
+    } else {
+        alert(`Pleade provide positive budget!`);
+    }
+
+    //console.log(totalBudget);
+
+    // Reset budget input
+    $('#budget-input').val('');
 }
 
 function clearInputs() {
@@ -24,11 +43,11 @@ function render() {
     $('#monthly-cost').empty();
     for (let i = 0; i < employees.length; i++) {
         $('.grid').append(`
-            <p id='${i}'>${employees[i].firstName}</p>
-            <p id='${i}'>${employees[i].lastName}</p>
-            <p id='${i}'>${employees[i].employeeID}</p>
-            <p id='${i}'>${employees[i].employeeTitle}</p>
-            <p id='${i}'>${employees[i].annualSalary}</p>
+            <p class='white-background' id='${i}'>${employees[i].firstName}</p>
+            <p class='light-gray' id='${i}'>${employees[i].lastName}</p>
+            <p class='white-background' id='${i}'>${employees[i].employeeID}</p>
+            <p class='light-gray' id='${i}'>${employees[i].employeeTitle}</p>
+            <p class='white-background' id='${i}'>${employees[i].annualSalary}</p>
             <button id='${i}' class='delete-btn'>Delete Employee</button>
         `);
     }
@@ -40,11 +59,11 @@ function render() {
         monthlyCost += Number(employees[i].annualSalary);
     }
 
-    if (monthlyCost > 20000) {
+    if (monthlyCost > totalBudget) {
         $('#monthly-cost').removeClass('white-background');
         $('#monthly-cost').addClass('red-background');
     }
-    if (monthlyCost < 25000) {
+    if (monthlyCost < totalBudget) {
         $('#monthly-cost').removeClass('red-background');
         $('#monthly-cost').addClass('white-background');
     }
@@ -67,8 +86,11 @@ function submit() {
     let annualSalary = $('#annual-salary').val();
 
     //console.log(firstName, lastName, employeeID, employeeTitle, annualSalary)
-
-    if (firstName && lastName && employeeID && employeeTitle && annualSalary) {
+    if(totalBudget === 0) {
+        console.log(true);
+        alert(`What's your budget?`)
+    } 
+    else if(firstName && lastName && employeeID && employeeTitle && annualSalary){
         let employeeObject = {
             firstName: firstName,
             lastName: lastName,
@@ -79,8 +101,8 @@ function submit() {
 
         //console.log(employeeObject)
         employees.push(employeeObject);
-    }
-    else {
+    } 
+    else{
         console.log('invalid');
         alert('must fill all inputs');
     }
