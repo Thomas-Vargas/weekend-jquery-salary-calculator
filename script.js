@@ -1,4 +1,4 @@
-console.log('js loaded')
+console.log('js loaded');
 
 let employees = [];
 let monthlyCost = 0;
@@ -11,34 +11,6 @@ function readyNow() {
     $('#submit').on('click', submit);
     $('.grid').on('click', '.delete-btn', deleteEmployee);
     $('#budget-submit').on('click', setBudget);
-}
-
-function setBudget() {
-    // If positive budget input, set totalBudet
-    if (totalBudget = $('#budget-input').val() > 0) {
-        totalBudget = $('#budget-input').val();
-    } 
-
-    // If totalBudget === true display it, else alert user
-    if (totalBudget) {
-        $('#user-budget').text(`Total Budget: ${totalBudget}`);
-    } else {
-        alert(`Pleade provide positive budget!`);
-    }
-
-    // console.log(totalBudget);
-
-    // Reset budget input
-    $('#budget-input').val('');
-    render()
-}
-
-function clearInputs() {
-    let firstName = $('#first-name').val('');
-    let lastName = $('#last-name').val('');
-    let employeeID = $('#employee-id').val('');
-    let employeeTitle = $('#employee-title').val('');
-    let annualSalary = $('#annual-salary').val('');
 }
 
 function render() {
@@ -61,10 +33,10 @@ function render() {
     //reset monthly cost 
     monthlyCost = 0;
 
-    // Update monthly cost with each employee salary
+    // Update monthly cost with each employee salary / 12
     for (let i = 0; i < employees.length; i++) {
         //console.log(employees[i].annualSalary);
-        monthlyCost += Number(employees[i].annualSalary);
+        monthlyCost += Math.round((Number(employees[i].annualSalary) / 12));
     }
 
     // Change background color if monthly cost exceeds totalBudget
@@ -83,13 +55,41 @@ function render() {
     $('#monthly-cost').html(`Total Monthly: $${monthlyCost}`);
 }
 
+function setBudget() {
+    // If positive budget input, set totalBudet
+    if (totalBudget = $('#budget-input').val() > 0) {
+        totalBudget = $('#budget-input').val();
+    } 
+
+    // If totalBudget === true display it, else alert user
+    if (totalBudget) {
+        $('#user-budget').text(`Total Budget: ${totalBudget}`);
+    } else {
+        alert(`Pleade provide positive budget!`);
+    }
+
+    console.log(totalBudget);
+
+    // Reset budget input
+    $('#budget-input').val('');
+    render();
+}
+
+function clearInputs() {
+    let firstName = $('#first-name').val('');
+    let lastName = $('#last-name').val('');
+    let employeeID = $('#employee-id').val('');
+    let employeeTitle = $('#employee-title').val('');
+    let annualSalary = $('#annual-salary').val('');
+}
+
 function deleteEmployee() {
     //console.log(this)
     let indexToRemove = this.id;
 
     // Remove employee from the employees array
     employees.splice(indexToRemove, 1);
-    render()
+    render();
 }
 
 function submit() {
@@ -103,9 +103,9 @@ function submit() {
     //console.log(totalBudget);
 
     // Alert user if totalBudget not defined
-    if(totalBudget === undefined) {
-        console.log(true);
-        alert(`What's your budget?`)
+    if(totalBudget === undefined || totalBudget <= 0) {
+        //console.log(true);
+        alert(`What's your budget?`);
     } 
     else if(firstName && lastName && employeeID && employeeTitle && annualSalary && totalBudget){
         let employeeObject = {
@@ -120,7 +120,7 @@ function submit() {
         employees.push(employeeObject);
     } 
     else{
-        console.log('invalid');
+        //console.log('invalid');
         alert('must fill all inputs');
     }
 
