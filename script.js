@@ -6,6 +6,7 @@ let monthlyCost = 0;
 $(document).ready(readyNow);
 
 function readyNow() {
+    $('#monthly-cost').addClass('white-background');
     $('#submit').on('click', submit);
     $('.grid').on('click', '.delete-btn', deleteEmployee);
 }
@@ -28,22 +29,24 @@ function render() {
             <p id='${i}'>${employees[i].employeeID}</p>
             <p id='${i}'>${employees[i].employeeTitle}</p>
             <p id='${i}'>${employees[i].annualSalary}</p>
-            <button id='${i}' class='delete-btn'>Delete Me</button>
+            <button id='${i}' class='delete-btn'>Delete Employee</button>
         `);
     }
 
     monthlyCost = 0;
 
     for (let i = 0; i < employees.length; i++) {
-        console.log(employees[i].annualSalary);
+        //console.log(employees[i].annualSalary);
         monthlyCost += Number(employees[i].annualSalary);
     }
 
     if (monthlyCost > 20000) {
+        $('#monthly-cost').removeClass('white-background');
         $('#monthly-cost').addClass('red-background');
     }
     if (monthlyCost < 25000) {
         $('#monthly-cost').removeClass('red-background');
+        $('#monthly-cost').addClass('white-background');
     }
     $('#monthly-cost').html(`Total Monthly: $${monthlyCost}`);
 }
@@ -63,7 +66,7 @@ function submit() {
     let employeeTitle = $('#employee-title').val();
     let annualSalary = $('#annual-salary').val();
 
-    console.log(firstName, lastName, employeeID, employeeTitle, annualSalary)
+    //console.log(firstName, lastName, employeeID, employeeTitle, annualSalary)
 
     if (firstName && lastName && employeeID && employeeTitle && annualSalary) {
         let employeeObject = {
@@ -82,7 +85,7 @@ function submit() {
         alert('must fill all inputs');
     }
 
-    console.log(employees);
+    //console.log(employees);
     clearInputs();
     render();
 }
