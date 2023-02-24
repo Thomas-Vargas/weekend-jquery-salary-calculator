@@ -14,20 +14,23 @@ function readyNow() {
 }
 
 function setBudget() {
+    // If positive budget input, set totalBudet
     if (totalBudget = $('#budget-input').val() > 0) {
         totalBudget = $('#budget-input').val();
     } 
 
+    // If totalBudget === true display it, else alert user
     if (totalBudget) {
         $('#user-budget').text(`Total Budget: ${totalBudget}`);
     } else {
         alert(`Pleade provide positive budget!`);
     }
 
-    console.log(totalBudget);
+    // console.log(totalBudget);
 
     // Reset budget input
     $('#budget-input').val('');
+    render()
 }
 
 function clearInputs() {
@@ -39,8 +42,11 @@ function clearInputs() {
 }
 
 function render() {
+    // Empty grid and monthly cost
     $('.grid').empty();
     $('#monthly-cost').empty();
+
+    // For each employee, append to dom
     for (let i = 0; i < employees.length; i++) {
         $('.grid').append(`
             <p class='white-background' id='${i}'>${employees[i].firstName}</p>
@@ -52,21 +58,28 @@ function render() {
         `);
     }
 
+    //reset monthly cost 
     monthlyCost = 0;
 
+    // Update monthly cost with each employee salary
     for (let i = 0; i < employees.length; i++) {
         //console.log(employees[i].annualSalary);
         monthlyCost += Number(employees[i].annualSalary);
     }
 
+    // Change background color if monthly cost exceeds totalBudget
     if (monthlyCost > totalBudget) {
         $('#monthly-cost').removeClass('white-background');
         $('#monthly-cost').addClass('red-background');
     }
+
+    // If monthlyCost is less than totalBudget, display default setting
     if (monthlyCost < totalBudget) {
         $('#monthly-cost').removeClass('red-background');
         $('#monthly-cost').addClass('white-background');
     }
+
+    // Change monthly cost html
     $('#monthly-cost').html(`Total Monthly: $${monthlyCost}`);
 }
 
@@ -74,6 +87,7 @@ function deleteEmployee() {
     //console.log(this)
     let indexToRemove = this.id;
 
+    // Remove employee from the employees array
     employees.splice(indexToRemove, 1);
     render()
 }
@@ -86,7 +100,9 @@ function submit() {
     let annualSalary = $('#annual-salary').val();
 
     //console.log(firstName, lastName, employeeID, employeeTitle, annualSalary)
-    console.log(totalBudget);
+    //console.log(totalBudget);
+
+    // Alert user if totalBudget not defined
     if(totalBudget === undefined) {
         console.log(true);
         alert(`What's your budget?`)
