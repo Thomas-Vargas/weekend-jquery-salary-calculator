@@ -40,13 +40,6 @@ header {
     display: flex;
 }
 
-.flex p {
-    margin-left: 2px;
-    display: grid;
-    flex: 1;
-    justify-content: left;
-}
-
 .form {
     margin-left: 20px;
 }
@@ -54,12 +47,11 @@ header {
 .grid {
     margin: 0px 20px 0px 20px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     border: 2px solid var(--secondary-color);
 }
 
 .grid p {
-
     font-size: 16px;
     margin: 0;
     padding: 10px;
@@ -82,10 +74,14 @@ header {
 }
 
 .label{
+    display: flex;
+    margin-left: 10px;
     color: white;
     padding: 10px 0px 10px 0px;
     font-size: 20px;
     font-weight: bold;
+    flex-grow: 1;
+    flex-basis: 0;
 }
 
 #submit, #budget-submit {
@@ -124,4 +120,13 @@ header {
 
 .light-gray {
     background-color: lightgray;
+}
+
+#user-budget {
+    text-align: center;
+    margin-top: 20px;
+    background-color: white;
+    width: 300px;
+    margin-left: 20px;
+    border: 2px solid var(--secondary-color);
 }

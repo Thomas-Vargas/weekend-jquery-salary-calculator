@@ -63,7 +63,9 @@ function setBudget() {
 
     // If totalBudget === true display it, else alert user
     if (totalBudget) {
-        $('#user-budget').text(`Total Budget: ${totalBudget}`);
+        $('#budget-wrapper').append(`
+            <h2 id="user-budget">Total Budget: ${totalBudget}</h2>
+        `);
     } else {
         alert(`Pleade provide positive budget!`);
     }
@@ -84,7 +86,7 @@ function clearInputs() {
 }
 
 function deleteEmployee() {
-    //console.log(this)
+    // console.log(this)
     let indexToRemove = this.id;
 
     // Remove employee from the employees array
