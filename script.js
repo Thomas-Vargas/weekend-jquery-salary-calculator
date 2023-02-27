@@ -30,6 +30,10 @@ function render() {
         `);
     }
 
+    calculateMonthlyCost()
+}
+
+function calculateMonthlyCost() {
     //reset monthly cost 
     monthlyCost = 0;
 
@@ -46,11 +50,11 @@ function render() {
     }
 
     // If monthlyCost is less than totalBudget, display default setting
-    if (monthlyCost < totalBudget) {
+    if (monthlyCost <= totalBudget) {
         $('#monthly-cost').removeClass('red-background');
         $('#monthly-cost').addClass('white-background');
     }
-
+    
     // Change monthly cost html
     $('#monthly-cost').html(`Total Monthly: $${monthlyCost}`);
 }
