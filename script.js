@@ -20,12 +20,14 @@ function render() {
 
     // For each employee, append to dom
     for (let i = 0; i < employees.length; i++) {
+        let convertedNumber = Number(employees[i].annualSalary).toLocaleString("en-US");
+
         $('.grid').append(`
             <p class='white-background' id='${i}'>${employees[i].firstName}</p>
             <p class='light-gray' id='${i}'>${employees[i].lastName}</p>
             <p class='white-background' id='${i}'>${employees[i].employeeID}</p>
             <p class='light-gray' id='${i}'>${employees[i].employeeTitle}</p>
-            <p class='white-background' id='${i}'>${employees[i].annualSalary}</p>
+            <p class='white-background' id='${i}'>$${convertedNumber}</p>
             <button id='${i}' class='delete-btn'>Delete Employee</button>
         `);
     }
@@ -56,7 +58,7 @@ function calculateMonthlyCost() {
     }
     
     // Change monthly cost html
-    $('#monthly-cost').html(`Total Monthly: $${monthlyCost}`);
+    $('#monthly-cost').html(`Total Monthly: $${monthlyCost.toLocaleString("en-US")}`);
 }
 
 function setBudget() {
@@ -68,7 +70,7 @@ function setBudget() {
     // If totalBudget === true display it, else alert user
     if (totalBudget) {
         $('#budget-wrapper').append(`
-            <h2 id="user-budget">Total Budget: ${totalBudget}</h2>
+            <h2 id="user-budget">Total Budget: $${Number(totalBudget).toLocaleString("en-US")}</h2>
         `);
     } else {
         alert(`Pleade provide positive budget!`);
