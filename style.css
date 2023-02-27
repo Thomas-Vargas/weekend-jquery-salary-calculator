@@ -65,6 +65,11 @@ header {
 .delete-btn {
     background-color: lightgray;
     font-size: 16px;
+    border: 1px solid var(--secondary-color);
+}
+
+.delete-btn:hover {
+    background-color: rgb(221, 76, 76);
 }
 
 .label-wrapper {
@@ -90,6 +95,12 @@ header {
     background-color: white;
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
+    cursor: pointer;
+}
+
+#submit:hover, #budget-submit:hover {
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 #monthly-cost {
